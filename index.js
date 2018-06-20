@@ -26,6 +26,10 @@ const ops = (op, num1, num2) => {
 
 app.use(express.static(p.join(__dirname, 'views')));
 
+app.get('/', (req, res) => {
+  res.send("Hello World!");
+});
+
 app.get('/math', (req, res) => {
   res.sendFile(p.join(__dirname, 'views', 'pages', 'math.html'));
 });
