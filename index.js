@@ -18,7 +18,8 @@ const ops = (op, num1, num2) => {
     case 'mod':  
       return n1 % n2;
     default:
-      console.log('ERROR');
+      console.log("ops() is returning null");
+      return null;
   }
 }
 
@@ -26,7 +27,7 @@ const ops = (op, num1, num2) => {
 app.use(express.static(p.join(__dirname, 'views')));
 
 app.get('/math', (req, res) => {
-  res.sendfile(p.join(__dirname, 'views', 'pages', 'math.html'));
+  res.sendFile(p.join(__dirname, 'views', 'pages', 'math.html'));
 });
 
 app.get('/result', (req, res) => {
@@ -34,6 +35,18 @@ app.get('/result', (req, res) => {
   res.render(p.join(__dirname, 'views', 'pages', 'result.ejs'), {
     result: JSON.stringify(ops(q.operation, q.num1, q.num2))
   });
+});
+
+app.get('/math_service', (req, res) => {
+  const q = req.query;
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({
+    number1: q.num1,
+    number2: q.num2,
+    operation: q.operation,
+    result: ops(q.operation, q.num1, q.num2)
+  }));
+
 });
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

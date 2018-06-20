@@ -5,8 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script 
+        src="https://code.jquery.com/jquery-3.3.1.min.js" 
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" 
+        crossorigin="anonymous"
+    ></script>
     <script>
-    </script>
+        var ajax = function () {
+            var queryString = '?' + $.param({
+                num1: $('#num1').val(),
+                num2: $('#num2').val(),
+                operation: $("#operation").val()
+            });
+            $.get(('/math_service' + queryString), function(data) {
+                $('#result').html(data.result); 
+            });
+        }
+                
+        </script>
 </head>
 <body>
     <form action="/result" method="get">
@@ -16,10 +32,13 @@
             <option value="mult">Multiply</option>
             <option value="div">Divide</option>
             <option value="mod">Modulus</option>
-        </select>
-        <input type="number" name="num1" id="num1">
-        <input type="number" name="num2" id="num2">
-        <input type="submit" value="Calculate">
-    </form> 
+        </select><br>
+        <input type="number" name="num1" id="num1"><br>
+        <input type="number" name="num2" id="num2"><br>
+        <input type="submit" value="Calculate"><br>
+    </form>
+    <button onclick="ajax()">Display on Page</button><br>
+    <span>The value is: </span><span id="result"></span>
+
 </body>
 </html>
