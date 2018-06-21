@@ -12,14 +12,35 @@
     ></script>
     <script>
         var ajax = function () {
-            var queryString = '?' + $.param({
-                num1: $('#num1').val(),
-                num2: $('#num2').val(),
-                operation: $("#operation").val()
-            });
-            $.get(('/math_service' + queryString), function(data) {
-                $('#result').html(data.result); 
-            });
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && status == 200) {
+                    document.getElementById("#result").innerHTML = this.responseText.result;
+                }
+            }
+
+            console.log(document.getElementById('#num1').value);
+            var num1 = document.getElementById('#num1').value;
+            var num2 = document.getElementById('#num2').value;
+            var operation = document.getElementById('#operation').value;
+            
+            xhttp.open('GET', "/math_service?num1=" + num1 + "&num2=" + num2 + "&operation=" + operation);
+            xhttp.send();
+
+            // var queryString = '?' + $.param({
+            //     num1: $('#num1').val(),
+            //     num2: $('#num2').val(),
+            //     operation: $("#operation").val()
+            // });
+            // console.log();
+            // $.get('url', callback);
+
+            // $.get(('/math_service' + queryString), function(data) {
+            //     $('#result').html(data.result); 
+            // });
+
+
+
         }
                 
         </script>

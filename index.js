@@ -23,8 +23,7 @@ const ops = (op, num1, num2) => {
   }
 }
 
-
-app.use(express.static(p.join(__dirname, 'views')));
+// app.use(express.static(p.join(__dirname, 'views')));
 
 app.get('/', (req, res) => {
   res.send("Hello World!");
